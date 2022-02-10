@@ -9,6 +9,7 @@ substitutions:
   _JFROG_REPO_NAME: clouddays
   _JFROG_CLI_VERSION: 2.11.0
   _JFROG_USER: <user-name>
+  _PIPELINE_REGION: <us-west1>
 
 steps:
 - name: 'gcr.io/cloud-builders/docker'
@@ -81,7 +82,7 @@ steps:
     [
       "beta", "deploy", "releases", "create", "rel-${SHORT_SHA}",
       "--delivery-pipeline", "clouddays-demo",
-      "--region", "us-central1",
+      "--region", "${_PIPELINE_REGION}",
       "--annotations", "commitId=${REVISION_ID}",
       "--images", "npm-app=${_JFROG_SERVER_NAME}/${_JFROG_REPO_NAME}/npm-app:${COMMIT_SHA}",
       "--source", "workshop-app"
